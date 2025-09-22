@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Proxmox Automation Studio</title>
+
+  <!-- Only Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --orange:#FF6D00;
+      --gray:#C5C5C5;
+      --black:#252525;
+      --white:#FFFFFF;
+
+      --h1: clamp(36px,5vw,52px);
+      --h2: clamp(28px,4vw,38px);
+      --lead: 24px;
+      --body: 16px;
+      --radius: 12px;
+
+
+      --border:#D1D5DB;    /* neutral 300 */
+      --text-2:#6B7280;    /* neutral 500 */
+      --error:#ffffff;     /* subtle red */
+      --ok:#16A34A;        /* subtle green */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--black);
+      background:var(--white);
+    }
+    img,svg,video{display:block;max-width:100%;height:auto}
+    a{color:inherit}
+    :focus{outline:none}
+
+    .container{max-width:1100px;margin-inline:auto;padding-inline:16px;width:100%}
+    .container--narrow{max-width:768px}
+
+    .mt-10{margin-top:10px}
+    .mt-25{margin-top:25px}
+    .mb-15{margin-bottom:15px}
+    .mb-25{margin-bottom:25px}
+    .mt-95{margin-top:95px}
+    .mt-140{margin-top:140px}
+    .mt-150{margin-top:150px}
+    .pt-150{padding-top:150px}
+
+    .hero{
+      background:var(--orange);
+      color:var(--white);
+      min-height:100svh;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:40px 16px;
+    }
+    .hero__logo{width:535px;height:73px;margin-inline:auto}
+    .hero__title{font-weight:600;font-size:var(--h1);line-height:1.2}
+    .hero__title span{display:block}
+    .hero__cta{
+      width:288px;max-width:90vw;height:58px;border:0;border-radius:10px;
+      background:var(--white);color:var(--black);
+      font-weight:700;font-size:20px;line-height:58px;cursor:pointer;
+    }
+
+    .block2__title{font-weight:600;font-size:var(--h2);line-height:1.2;text-align:center}
+    .block2__subtitle{font-weight:800;font-size:26px;line-height:1.2;color:var(--orange);text-align:center}
+
+    .block3__title{text-align:center;font-weight:600;font-size:var(--h2);line-height:1.2}
+    .block3__title .accent{color:var(--orange)}
+    .block3__cards{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:50px}
+    .block3__card{
+      position:relative;width:250px;height:300px;border-radius:10px;
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:28px;text-align:left
+    }
+    .block3__icon{
+      position:absolute;top:20px;right:20px;width:56px;height:56px;border-radius:50%;
+      background:var(--white);display:grid;place-items:center
+    }
+    .block3__card h3{margin:0;font-weight:600;font-size:24px}
+    .block3__card p{margin:15px 0 0;font-size:var(--body);line-height:1.25}
+    .block3__card .highlight{color:var(--orange);font-weight:700}
+    .card--gray{background:var(--gray);color:var(--black)}
+    .card--orange{background:var(--orange);color:var(--white)}
+    .card--black{background:var(--black);color:var(--white)}
+
+    .block4__title{text-align:center;font-weight:600;font-size:var(--h2)}
+    .block4__subtitle{text-align:center;font-weight:500;font-size:var(--lead);line-height:35px}
+    .pri-loop{color:var(--black)}
+    .cards{display:flex;flex-direction:column;align-items:center}
+    .card{
+      width:850px;max-width:100%;height:120px;border-radius:var(--radius);
+      display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+      padding-inline:16px
+    }
+    .pri-sep{width:35px;height:35px}
+    .card .title{font-size:24px;font-weight:700}
+    .card .desc{font-size:16px;line-height:1.5}
+    .card.gray{background:var(--gray);color:var(--black)}
+    .card.orange{background:var(--orange);color:#fff}
+    .card.black{background:var(--black);color:#fff}
+    .heading{text-align:center;font-size:var(--h2);font-weight:600}
+    .showcase{width:850px;height:478px;max-width:100%;border-radius:var(--radius);overflow:hidden;margin-inline:auto}
+    .showcase iframe{width:100%;height:100%;border:0;display:block}
+
+    .cta{background:var(--orange);color:#fff;text-align:center}
+    .cta-title{font-size:var(--h2);font-weight:600}
+    .cta-subtitle{font-size:var(--lead);line-height:35px;font-weight:500}
+
+    .cta-form{display:flex;flex-direction:column;align-items:center;text-align:left;gap:20px}
+    .cta-form label{
+      display:flex;flex-direction:column;
+      width:750px;max-width:100%;min-width:320px;
+    }
+    .cta-form span{font-weight:600;font-size:24px;margin-bottom:8px}
+
+
+    .control{
+      width:100%;height:50px;border-radius:.75rem;
+      padding:0 16px;border:1px solid var(--border);
+      font-size:16px;color:var(--black);background:#fff;
+    }
+    .control:focus{border-color:var(--black)}
+    textarea.control{min-height:120px;resize:vertical;padding:12px 16px}
+
+
+    .hint{
+      min-height:16px;
+      font-size:12px;
+      line-height:16px;
+      margin-top:6px;
+      color:var(--text-2);
+      opacity:.9;
+      letter-spacing:.01em;
+      display:block;
+    }
+    .hint.is-error{color:var(--error)}
+    .hint.is-ok{color:var(--ok)}
+
+
+    .control[aria-invalid="true"]{border-color:var(--error)}
+    .control[aria-invalid="false"]{border-color:var(--border)}
+
+    .cta-form button{
+      width:750px;max-width:100%;min-width:320px;height:80px;
+      border-radius:.75rem;border:none;cursor:pointer;
+      background:var(--black);color:#fff;
+      font-weight:700;font-size:24px;
+      display:grid;place-items:center;
+    }
+
+    .footer{background:var(--orange);color:#fff;text-align:center;font-size:14px;padding-top:95px;padding-bottom:30px}
+    .footer a{text-decoration:underline}
+
+    @media (max-width:560px){
+      .hero__logo{width:min(535px,80vw);height:auto}
+      .card .title{font-size:20px}
+      .card .desc{font-size:15px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Intro">
+    <div class="container">
+      <div class="hero__logo" aria-label="Logo 535×73">
+        <img src="logo.png" width="535" height="73" alt="Antrieb.ai logo" />
+      </div>
+
+      <h1 class="hero__title mt-140">
+        Your Proxmox Automation Studio :
+        <span>Prompt, Run, Iterate.</span>
+      </h1>
+
+      <button class="hero__cta mt-140" type="button" id="scroll-to-signup">
+        Register Interest
+      </button>
+    </div>
+  </section>
+
+  <!-- BLOCK 2 -->
+  <section class="block2" id="block2">
+    <div class="container">
+      <h2 class="block2__title mt-150">Playbook hallucinations ruining your clusters?</h2>
+      <p class="block2__subtitle mt-25">Antrieb. Prompt, Run, Iterate.</p>
+    </div>
+  </section>
+
+  <!-- BLOCK 3 -->
+  <section class="block3" id="block3">
+    <div class="container">
+      <h2 class="block3__title mt-150">Why <span class="accent">Antrieb.ai</span>?</h2>
+
+      <div class="block3__cards mt-95">
+        <article class="block3__card card--gray">
+          <div class="block3__icon">
+            <img src="shield.png" width="32" height="32" alt="" />
+          </div>
+          <h3>Safe sandbox</h3>
+          <p>test without breaking<br />your cluster</p>
+        </article>
+
+        <article class="block3__card card--orange">
+          <div class="block3__icon">
+            <img src="lightning.png" width="32" height="32" alt="" />
+          </div>
+          <h3>Zero setup</h3>
+          <p>skip the messy configs<br /><span class="highlight">1</span></p>
+        </article>
+
+        <article class="block3__card card--black">
+          <div class="block3__icon">
+            <img src="rocket.png" width="32" height="32" alt="" />
+          </div>
+          <h3>Faster iteration</h3>
+          <p>vibe coding style<br />automation loop</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRI LOOP -->
+  <section class="block4" id="block4">
+    <div class="container">
+      <h2 class="block4__title mt-150">The Antrieb PRI Loop</h2>
+      <p class="block4__subtitle mt-25">Automation without fear, built on three simple steps:</p>
+    </div>
+
+    <div class="pri-loop container">
+      <div class="cards mt-95">
+        <div class="card gray">
+          <span class="title">Prompt</span>
+          <span class="desc mt-10">describe what you need in plain language.</span>
+        </div>
+
+        <img class="pri-sep mt-25 mb-25" src="down_arrow.png" alt="" width="35" height="35" />
+
+        <div class="card orange">
+          <span class="title">Run</span>
+          <span class="desc mt-10">test it safely in your Antrieb sandbox, not your cluster.</span>
+        </div>
+
+        <img class="pri-sep mt-25 mb-25" src="down_arrow.png" alt="" width="35" height="35" />
+
+        <div class="card black">
+          <span class="title">Iterate</span>
+          <span class="desc mt-10">refine, retry, and improve in a seamless loop.</span>
+        </div>
+
+        <img class="pri-sep mt-25" src="back_arrow.png" alt="" width="35" height="35" />
+      </div>
+
+      <h3 class="heading mt-150">Antrieb Safe Automation: Antrieb.AI</h3>
+
+      <div class="showcase mt-95">
+        <iframe
+          src="https://www.youtube.com/embed/Of8wdHLqkMA"
+          title="YouTube video player"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section id="signup" class="cta" aria-labelledby="signup-title">
+    <div class="container container--narrow mt-150 pt-150">
+      <h2 class="cta-title" id="signup-title">Join the Early Access List</h2>
+      <p class="cta-subtitle mt-25">
+        Be the first to try Antrieb.<br />
+        Register and we’ll notify you when the studio is ready.
+      </p>
+
+      <!-- minimalist validation -->
+      <form class="cta-form mt-95" id="signup-form" action="#" method="post" novalidate>
+        <label>
+          <span>Full Name</span>
+          <input class="control" type="text" name="name" placeholder="Jane Doe" aria-invalid="false" required />
+          <small class="hint" data-for="name"></small>
+        </label>
+
+        <label>
+          <span>Email Address</span>
+          <input class="control" type="email" name="email" placeholder="jane@company.com" aria-invalid="false" required />
+          <small class="hint" data-for="email"></small>
+        </label>
+
+        <label>
+          <span>What excites you about Antrieb.ai? (optional)</span>
+          <textarea class="control" name="note" rows="4" placeholder="Tell us briefly…"></textarea>
+          <small class="hint" data-for="note"></small>
+        </label>
+
+        <button type="submit">Register Interest</button>
+
+        <small id="privacy-note" style="display:block;margin-top:12px;opacity:.85">
+          We’ll only use your email to notify you about early access.
+        </small>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <p>© 2025 <a href="#" rel="nofollow">Antrieb.ai</a> All rights reserved.</p>
+  </footer>
+
+  <script>
+
+    document.getElementById('scroll-to-signup')?.addEventListener('click', () => {
+      document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+
+    const form = document.getElementById('signup-form');
+
+    const rules = {
+      name: (v) => v.trim().length > 0 || 'Please enter your name',
+      email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please enter a valid email'
+
+    };
+
+    function setHint(input, msg, ok=false){
+      const hint = input.parentElement.querySelector('.hint[data-for="'+input.name+'"]');
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (!hint) return;
+      if (msg){
+        hint.textContent = msg;
+        hint.classList.add('is-error');
+        hint.classList.remove('is-ok');
+      } else {
+        hint.textContent = '';              
+        hint.classList.remove('is-error','is-ok');
+      }
+    }
+
+    function validateField(input){
+      const name = input.name;
+      const val = input.value || '';
+      if (!rules[name]) { setHint(input, ''); return true; }
+      const res = rules[name](val);
+      if (res !== true){ setHint(input, String(res)); return false; }
+      setHint(input, '');
+      return true;
+    }
+
+
+    form.addEventListener('blur', (e)=>{
+      const el = e.target;
+      if (el.classList?.contains('control')) validateField(el);
+    }, true);
+
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const inputs = Array.from(form.querySelectorAll('.control'));
+      const ok = inputs.map(validateField).every(Boolean);
+      if (!ok){
+        const first = inputs.find(i => i.getAttribute('aria-invalid') === 'true');
+        first?.focus();
+        return;
+      }
+
+      form.reset();
+      inputs.forEach(i => setHint(i, ''));
+
+
+      const note = document.getElementById('privacy-note');
+      if (note && !note.dataset.ok){
+        const msg = document.createElement('small');
+        msg.textContent = 'Thanks — your request has been recorded.';
+        msg.style.display = 'block';
+        msg.style.marginTop = '10px';
+        msg.style.opacity = '.9';
+        note.insertAdjacentElement('beforebegin', msg);
+        note.dataset.ok = '1';
+        setTimeout(()=>{ msg.remove(); delete note.dataset.ok; }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
