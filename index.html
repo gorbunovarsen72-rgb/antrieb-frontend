@@ -1,394 +1,598 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Proxmox Automation Studio</title>
-
-  <!-- Only Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dio's Illustration Studio – Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Baloo+2:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --orange:#FF6D00;
-      --gray:#C5C5C5;
-      --black:#252525;
-      --white:#FFFFFF;
-
-      --h1: clamp(36px,5vw,52px);
-      --h2: clamp(28px,4vw,38px);
-      --lead: 24px;
-      --body: 16px;
-      --radius: 12px;
-
-
-      --border:#D1D5DB;    /* neutral 300 */
-      --text-2:#6B7280;    /* neutral 500 */
-      --error:#ffffff;     /* subtle red */
-      --ok:#16A34A;        /* subtle green */
+    :root {
+      --bg: #f5eefe;
+      --bg-dark: #f1e5fd;
+      --primary: #725bff;
+      --primary-dark: #5f47f5;
+      --accent: #ff9fd8;
+      --text: #574066;
+      --text-strong: #2f2140;
+      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(108, 79, 198, 0.15);
+      --radius-lg: 36px;
+      --radius-md: 24px;
+      --radius-sm: 16px;
+      --transition: 180ms ease-in-out;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--black);
-      background:var(--white);
-    }
-    img,svg,video{display:block;max-width:100%;height:auto}
-    a{color:inherit}
-    :focus{outline:none}
-
-    .container{max-width:1100px;margin-inline:auto;padding-inline:16px;width:100%}
-    .container--narrow{max-width:768px}
-
-    .mt-10{margin-top:10px}
-    .mt-25{margin-top:25px}
-    .mb-15{margin-bottom:15px}
-    .mb-25{margin-bottom:25px}
-    .mt-95{margin-top:95px}
-    .mt-140{margin-top:140px}
-    .mt-150{margin-top:150px}
-    .pt-150{padding-top:150px}
-
-    .hero{
-      background:var(--orange);
-      color:var(--white);
-      min-height:100svh;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:40px 16px;
-    }
-    .hero__logo{width:535px;height:73px;margin-inline:auto}
-    .hero__title{font-weight:600;font-size:var(--h1);line-height:1.2}
-    .hero__title span{display:block}
-    .hero__cta{
-      width:288px;max-width:90vw;height:58px;border:0;border-radius:10px;
-      background:var(--white);color:var(--black);
-      font-weight:700;font-size:20px;line-height:58px;cursor:pointer;
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
 
-    .block2__title{font-weight:600;font-size:var(--h2);line-height:1.2;text-align:center}
-    .block2__subtitle{font-weight:800;font-size:26px;line-height:1.2;color:var(--orange);text-align:center}
-
-    .block3__title{text-align:center;font-weight:600;font-size:var(--h2);line-height:1.2}
-    .block3__title .accent{color:var(--orange)}
-    .block3__cards{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:50px}
-    .block3__card{
-      position:relative;width:250px;height:300px;border-radius:10px;
-      display:flex;flex-direction:column;justify-content:flex-end;
-      padding:28px;text-align:left
-    }
-    .block3__icon{
-      position:absolute;top:20px;right:20px;width:56px;height:56px;border-radius:50%;
-      background:var(--white);display:grid;place-items:center
-    }
-    .block3__card h3{margin:0;font-weight:600;font-size:24px}
-    .block3__card p{margin:15px 0 0;font-size:var(--body);line-height:1.25}
-    .block3__card .highlight{color:var(--orange);font-weight:700}
-    .card--gray{background:var(--gray);color:var(--black)}
-    .card--orange{background:var(--orange);color:var(--white)}
-    .card--black{background:var(--black);color:var(--white)}
-
-    .block4__title{text-align:center;font-weight:600;font-size:var(--h2)}
-    .block4__subtitle{text-align:center;font-weight:500;font-size:var(--lead);line-height:35px}
-    .pri-loop{color:var(--black)}
-    .cards{display:flex;flex-direction:column;align-items:center}
-    .card{
-      width:850px;max-width:100%;height:120px;border-radius:var(--radius);
-      display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
-      padding-inline:16px
-    }
-    .pri-sep{width:35px;height:35px}
-    .card .title{font-size:24px;font-weight:700}
-    .card .desc{font-size:16px;line-height:1.5}
-    .card.gray{background:var(--gray);color:var(--black)}
-    .card.orange{background:var(--orange);color:#fff}
-    .card.black{background:var(--black);color:#fff}
-    .heading{text-align:center;font-size:var(--h2);font-weight:600}
-    .showcase{width:850px;height:478px;max-width:100%;border-radius:var(--radius);overflow:hidden;margin-inline:auto}
-    .showcase iframe{width:100%;height:100%;border:0;display:block}
-
-    .cta{background:var(--orange);color:#fff;text-align:center}
-    .cta-title{font-size:var(--h2);font-weight:600}
-    .cta-subtitle{font-size:var(--lead);line-height:35px;font-weight:500}
-
-    .cta-form{display:flex;flex-direction:column;align-items:center;text-align:left;gap:20px}
-    .cta-form label{
-      display:flex;flex-direction:column;
-      width:750px;max-width:100%;min-width:320px;
-    }
-    .cta-form span{font-weight:600;font-size:24px;margin-bottom:8px}
-
-
-    .control{
-      width:100%;height:50px;border-radius:.75rem;
-      padding:0 16px;border:1px solid var(--border);
-      font-size:16px;color:var(--black);background:#fff;
-    }
-    .control:focus{border-color:var(--black)}
-    textarea.control{min-height:120px;resize:vertical;padding:12px 16px}
-
-
-    .hint{
-      min-height:16px;
-      font-size:12px;
-      line-height:16px;
-      margin-top:6px;
-      color:var(--text-2);
-      opacity:.9;
-      letter-spacing:.01em;
-      display:block;
-    }
-    .hint.is-error{color:var(--error)}
-    .hint.is-ok{color:var(--ok)}
-
-
-    .control[aria-invalid="true"]{border-color:var(--error)}
-    .control[aria-invalid="false"]{border-color:var(--border)}
-
-    .cta-form button{
-      width:750px;max-width:100%;min-width:320px;height:80px;
-      border-radius:.75rem;border:none;cursor:pointer;
-      background:var(--black);color:#fff;
-      font-weight:700;font-size:24px;
-      display:grid;place-items:center;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #f9f4ff 50%, var(--bg-dark) 100%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
     }
 
-    .footer{background:var(--orange);color:#fff;text-align:center;font-size:14px;padding-top:95px;padding-bottom:30px}
-    .footer a{text-decoration:underline}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-    @media (max-width:560px){
-      .hero__logo{width:min(535px,80vw);height:auto}
-      .card .title{font-size:20px}
-      .card .desc{font-size:15px}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 32px clamp(24px, 6vw, 72px) 16px;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(24px, 3vw, 32px);
+      color: var(--primary-dark);
+    }
+
+    .brand img {
+      width: clamp(48px, 5vw, 56px);
+      height: auto;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: clamp(18px, 3vw, 32px);
+      margin: 0;
+      padding: 0;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-strong);
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 999px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform var(--transition);
+    }
+
+    nav a:hover::after,
+    nav a:focus-visible::after,
+    nav a[aria-current="page"]::after {
+      transform: scaleX(1);
+    }
+
+    main {
+      flex: 1;
+      padding: clamp(24px, 6vw, 60px);
+      display: grid;
+      place-items: center;
+    }
+
+    .hero {
+      width: min(1160px, 100%);
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: clamp(32px, 7vw, 60px);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: clamp(32px, 6vw, 60px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(114, 91, 255, 0.08);
+      z-index: 0;
+      filter: blur(0);
+    }
+
+    .hero::before {
+      width: 420px;
+      height: 420px;
+      top: -200px;
+      right: -160px;
+    }
+
+    .hero::after {
+      width: 320px;
+      height: 320px;
+      bottom: -160px;
+      left: -120px;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .intro {
+      text-align: center;
+    }
+
+    .intro h1 {
+      margin: 0 0 14px;
+      font-family: 'Baloo 2', cursive;
+      font-weight: 700;
+      font-size: clamp(42px, 6vw, 72px);
+      color: var(--primary-dark);
+    }
+
+    .intro p {
+      margin: 0 auto;
+      font-size: clamp(17px, 2.3vw, 19px);
+      line-height: 1.7;
+      max-width: 420px;
+      color: var(--text);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(32px, 5vw, 48px);
+    }
+
+    .contact-card {
+      background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 5vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-card h2 {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(28px, 4vw, 36px);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      font: inherit;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: none;
+      outline: 0;
+      background: rgba(255, 255, 255, 0.18);
+      color: inherit;
+      transition: background var(--transition), box-shadow var(--transition);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    input:focus-visible,
+    textarea:focus-visible {
+      background: rgba(255, 255, 255, 0.32);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+    }
+
+    .contact-card button {
+      margin-top: 6px;
+      padding: 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: var(--text-strong);
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 12px 30px rgba(255, 159, 216, 0.35);
+    }
+
+    .contact-card button:hover,
+    .contact-card button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(255, 159, 216, 0.45);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(24px, 4vw, 36px);
+    }
+
+    .community {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      padding: clamp(24px, 4vw, 32px);
+      color: var(--text-strong);
+      display: grid;
+      gap: 16px;
+      box-shadow: 0 18px 35px rgba(122, 85, 214, 0.08);
+    }
+
+    .community h3 {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(24px, 3.3vw, 30px);
+      color: var(--primary-dark);
+    }
+
+    .socials {
+      display: flex;
+      gap: 14px;
+    }
+
+    .socials a {
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: var(--white);
+      color: var(--primary-dark);
+      box-shadow: 0 12px 30px rgba(108, 79, 198, 0.12);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .socials a:hover,
+    .socials a:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 36px rgba(108, 79, 198, 0.18);
+    }
+
+    .newsletter {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: clamp(24px, 4vw, 32px);
+      box-shadow: 0 18px 35px rgba(122, 85, 214, 0.08);
+      display: grid;
+      gap: 20px;
+    }
+
+    .newsletter h3 {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(24px, 3.3vw, 30px);
+      color: var(--primary-dark);
+    }
+
+    .newsletter p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .newsletter form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .newsletter input[type="email"] {
+      background: rgba(114, 91, 255, 0.08);
+      color: var(--text-strong);
+      box-shadow: none;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(114, 91, 255, 0.15);
+      padding: 14px 18px;
+    }
+
+    .newsletter input::placeholder {
+      color: rgba(47, 33, 64, 0.45);
+    }
+
+    .newsletter button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-weight: 700;
+      font-size: 15px;
+      background: var(--primary);
+      color: var(--white);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      box-shadow: 0 12px 24px rgba(114, 91, 255, 0.25);
+    }
+
+    .newsletter button:hover,
+    .newsletter button:focus-visible {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(114, 91, 255, 0.35);
+    }
+
+    footer {
+      padding: 40px clamp(24px, 6vw, 72px) 48px;
+      background: transparent;
+      text-align: center;
+      color: rgba(47, 33, 64, 0.7);
+      font-size: 15px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 22px;
+      color: var(--primary-dark);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 14px;
+    }
+
+    .footer-socials a {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--primary-dark);
+      box-shadow: 0 8px 20px rgba(108, 79, 198, 0.12);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        padding: clamp(32px, 10vw, 48px);
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding-inline: clamp(18px, 6vw, 24px);
+      }
+
+      nav ul {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        border-radius: 28px;
+      }
+
+      .contact-card {
+        border-radius: 28px;
+      }
+
+      .newsletter form {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding-inline: clamp(18px, 6vw, 24px);
+      }
+
+      .footer-top {
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="navbar">
+      <a class="brand" href="#">
+        <img src="logo.png" alt="Dio's Illustration Studio logo" width="56" height="56">
+        Dio's Illustration Studio
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#" aria-current="page">Home</a></li>
+          <li><a href="#services">Get inspired</a></li>
+          <li><a href="#prints">Request a Print</a></li>
+          <li><a href="#faq">How it works</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero" id="hero" aria-label="Intro">
-    <div class="container">
-      <div class="hero__logo" aria-label="Logo 535×73">
-        <img src="logo.png" width="535" height="73" alt="Antrieb.ai logo" />
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="intro">
+        <h1 id="hero-title">Let's connect</h1>
+        <p>
+          Hello! I'm looking to create a few custom illustrations for the next gig poster —
+          mostly for concerts and merch drops. Could you help?
+        </p>
       </div>
 
-      <h1 class="hero__title mt-140">
-        Your Proxmox Automation Studio :
-        <span>Prompt, Run, Iterate.</span>
-      </h1>
-
-      <button class="hero__cta mt-140" type="button" id="scroll-to-signup">
-        Register Interest
-      </button>
-    </div>
-  </section>
-
-  <!-- BLOCK 2 -->
-  <section class="block2" id="block2">
-    <div class="container">
-      <h2 class="block2__title mt-150">Playbook hallucinations ruining your clusters?</h2>
-      <p class="block2__subtitle mt-25">Antrieb. Prompt, Run, Iterate.</p>
-    </div>
-  </section>
-
-  <!-- BLOCK 3 -->
-  <section class="block3" id="block3">
-    <div class="container">
-      <h2 class="block3__title mt-150">Why <span class="accent">Antrieb.ai</span>?</h2>
-
-      <div class="block3__cards mt-95">
-        <article class="block3__card card--gray">
-          <div class="block3__icon">
-            <img src="shield.png" width="32" height="32" alt="" />
-          </div>
-          <h3>Safe sandbox</h3>
-          <p>test without breaking<br />your cluster</p>
-        </article>
-
-        <article class="block3__card card--orange">
-          <div class="block3__icon">
-            <img src="lightning.png" width="32" height="32" alt="" />
-          </div>
-          <h3>Zero setup</h3>
-          <p>skip the messy configs<br /><span class="highlight">1</span></p>
-        </article>
-
-        <article class="block3__card card--black">
-          <div class="block3__icon">
-            <img src="rocket.png" width="32" height="32" alt="" />
-          </div>
-          <h3>Faster iteration</h3>
-          <p>vibe coding style<br />automation loop</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRI LOOP -->
-  <section class="block4" id="block4">
-    <div class="container">
-      <h2 class="block4__title mt-150">The Antrieb PRI Loop</h2>
-      <p class="block4__subtitle mt-25">Automation without fear, built on three simple steps:</p>
-    </div>
-
-    <div class="pri-loop container">
-      <div class="cards mt-95">
-        <div class="card gray">
-          <span class="title">Prompt</span>
-          <span class="desc mt-10">describe what you need in plain language.</span>
+      <div class="hero-grid">
+        <div class="contact-card">
+          <h2>Contact Form</h2>
+          <form action="#" method="post">
+            <label for="name">Name
+              <input type="text" id="name" name="name" placeholder="Dani" required>
+            </label>
+            <label for="email">Email
+              <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            </label>
+            <label for="message">Message
+              <textarea id="message" name="message" placeholder="Share what you're dreaming up..." required></textarea>
+            </label>
+            <button type="submit">Send Message</button>
+          </form>
         </div>
 
-        <img class="pri-sep mt-25 mb-25" src="down_arrow.png" alt="" width="35" height="35" />
+        <div class="sidebar">
+          <div class="community">
+            <h3>Join the adventure online</h3>
+            <p>Follow along for behind-the-scenes sketches, livestreams, and art drops.</p>
+            <div class="socials" aria-label="Social media links">
+              <a href="https://discord.com" aria-label="Discord" target="_blank" rel="noreferrer">
+                <svg width="22" height="22" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                  <path d="M216.86 52.16a208.49 208.49 0 0 0-51.69-16.51a4 4 0 0 0-4.31 2.41a143.13 143.13 0 0 0-6.59 20.8a192.93 192.93 0 0 0-52.54 0a143.31 143.31 0 0 0-6.59-20.8a4 4 0 0 0-4.31-2.41a208.69 208.69 0 0 0-51.69 16.51a4 4 0 0 0-1.87 2.19c-22.8 64.45-4.09 128.58 19.12 170.2a4 4 0 0 0 2.64 2a168.49 168.49 0 0 0 45.06 6.17a4 4 0 0 0 3.59-2.06L112.88 204a4 4 0 0 0-2.25-5.77a99.65 99.65 0 0 1-14.52-5.3a4 4 0 0 1-1-6.54c.97-.74 1.95-1.5 2.9-2.23c.51-.4 1-.78 1.52-1.15c17.5 8.4 36.86 8.4 54.31 0c.51.37 1 .76 1.52 1.15c.95.73 1.93 1.49 2.9 2.23a4 4 0 0 1-1 6.54a99.33 99.33 0 0 1-14.52 5.3a4 4 0 0 0-2.25 5.77l8.81 16.7a4 4 0 0 0 3.59 2.06a168.49 168.49 0 0 0 45.06-6.17a4 4 0 0 0 2.64-2c23.57-42.06 41.8-106.19 19-170.64a4 4 0 0 0-1.9-2.27Zm-121 108.15c-10.23 0-18.66-9.79-18.66-21.84s8.24-21.84 18.66-21.84s18.76 9.9 18.66 21.84c0 12-8.23 21.84-18.66 21.84Zm64.22 0c-10.23 0-18.66-9.79-18.66-21.84s8.24-21.84 18.66-21.84s18.76 9.9 18.66 21.84c0 12-8.23 21.84-18.66 21.84Z" />
+                </svg>
+              </a>
+              <a href="https://www.youtube.com" aria-label="YouTube" target="_blank" rel="noreferrer">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C15.8 4.8 12 4.8 12 4.8h0s-3.8 0-6.9.3c-.4 0-1.3.1-2.1.9-.6.6-.8 2-.8 2S2 9.6 2 11.1v1.7C2 14.3 2.2 16 2.2 16s.2 1.4.8 2c.8.8 1.8.8 2.3.9 1.7.2 7 .3 7 .3s3.8 0 6.9-.3c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.7.2-3.2v-1.7C22 9.6 21.8 8 21.8 8ZM10 14.7V8.9l5.7 2.9L10 14.7Z" />
+                </svg>
+              </a>
+              <a href="https://www.instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.5.2.8.4 1.1.7.3.3.5.6.7 1.1.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.5-.4.8-.7 1.1-.3.3-.6.5-1.1.7-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.5-.2-.8-.4-1.1-.7-.3-.3-.5-.6-.7-1.1-.2-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.5.4-.8.7-1.1.3-.3.6-.5 1.1-.7.4-.2 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1Zm0-2.2C8.7 0 8.3 0 7 0 5.7.1 4.9.3 4.2.6c-.8.3-1.4.7-2 1.3C1.6 2.5 1.2 3.1.9 3.9.6 4.6.4 5.4.3 6.7 0 8 0 8.3 0 12c0 3.7 0 4 .3 5.3.1 1.3.3 2.1.6 2.8.3.8.7 1.4 1.3 2 .6.6 1.2 1 2 1.3.7.3 1.5.5 2.8.6C8.3 24 8.7 24 12 24s3.7 0 5-.3c1.3-.1 2.1-.3 2.8-.6.8-.3 1.4-.7 2-1.3.6-.6 1-1.2 1.3-2 .3-.7.5-1.5.6-2.8.3-1.3.3-1.6.3-5.3 0-3.7 0-4-.3-5.3-.1-1.3-.3-2.1-.6-2.8-.3-.8-.7-1.4-1.3-2-.6-.6-1.2-1-2-1.3-.7-.3-1.5-.5-2.8-.6C15.7 0 15.3 0 12 0Z" />
+                  <path d="M12 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8Zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.4-10.8a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5Z" />
+                </svg>
+              </a>
+            </div>
+          </div>
 
-        <div class="card orange">
-          <span class="title">Run</span>
-          <span class="desc mt-10">test it safely in your Antrieb sandbox, not your cluster.</span>
+          <div class="newsletter">
+            <h3>Subscribe to our newsletter</h3>
+            <p>Get monthly studio updates, workshop invites, and first dibs on limited prints.</p>
+            <form action="#" method="post">
+              <label class="visually-hidden" for="newsletter-email">Email address</label>
+              <input type="email" id="newsletter-email" name="newsletter-email" placeholder="you@email.com" required>
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
         </div>
-
-        <img class="pri-sep mt-25 mb-25" src="down_arrow.png" alt="" width="35" height="35" />
-
-        <div class="card black">
-          <span class="title">Iterate</span>
-          <span class="desc mt-10">refine, retry, and improve in a seamless loop.</span>
-        </div>
-
-        <img class="pri-sep mt-25" src="back_arrow.png" alt="" width="35" height="35" />
       </div>
+    </section>
+  </main>
 
-      <h3 class="heading mt-150">Antrieb Safe Automation: Antrieb.AI</h3>
-
-      <div class="showcase mt-95">
-        <iframe
-          src="https://www.youtube.com/embed/Of8wdHLqkMA"
-          title="YouTube video player"
-          allowfullscreen>
-        </iframe>
+  <footer>
+    <div class="footer-top">
+      <a class="footer-brand" href="#">
+        <img src="logo.png" alt="Dio's Illustration Studio logo" width="44" height="44">
+        Dio's Studio
+      </a>
+      <div class="footer-socials">
+        <a href="https://discord.com" aria-label="Discord" target="_blank" rel="noreferrer">
+          <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+            <path d="M216.86 52.16a208.49 208.49 0 0 0-51.69-16.51a4 4 0 0 0-4.31 2.41a143.13 143.13 0 0 0-6.59 20.8a192.93 192.93 0 0 0-52.54 0a143.31 143.31 0 0 0-6.59-20.8a4 4 0 0 0-4.31-2.41a208.69 208.69 0 0 0-51.69 16.51a4 4 0 0 0-1.87 2.19c-22.8 64.45-4.09 128.58 19.12 170.2a4 4 0 0 0 2.64 2a168.49 168.49 0 0 0 45.06 6.17a4 4 0 0 0 3.59-2.06L112.88 204a4 4 0 0 0-2.25-5.77a99.65 99.65 0 0 1-14.52-5.3a4 4 0 0 1-1-6.54c.97-.74 1.95-1.5 2.9-2.23c.51-.4 1-.78 1.52-1.15c17.5 8.4 36.86 8.4 54.31 0c.51.37 1 .76 1.52 1.15c.95.73 1.93 1.49 2.9 2.23a4 4 0 0 1-1 6.54a99.33 99.33 0 0 1-14.52 5.3a4 4 0 0 0-2.25 5.77l8.81 16.7a4 4 0 0 0 3.59 2.06a168.49 168.49 0 0 0 45.06-6.17a4 4 0 0 0 2.64-2c23.57-42.06 41.8-106.19 19-170.64a4 4 0 0 0-1.9-2.27Zm-121 108.15c-10.23 0-18.66-9.79-18.66-21.84s8.24-21.84 18.66-21.84s18.76 9.9 18.66 21.84c0 12-8.23 21.84-18.66 21.84Zm64.22 0c-10.23 0-18.66-9.79-18.66-21.84s8.24-21.84 18.66-21.84s18.76 9.9 18.66 21.84c0 12-8.23 21.84-18.66 21.84Z" />
+          </svg>
+        </a>
+        <a href="https://www.youtube.com" aria-label="YouTube" target="_blank" rel="noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C15.8 4.8 12 4.8 12 4.8h0s-3.8 0-6.9.3c-.4 0-1.3.1-2.1.9-.6.6-.8 2-.8 2S2 9.6 2 11.1v1.7C2 14.3 2.2 16 2.2 16s.2 1.4.8 2c.8.8 1.8.8 2.3.9 1.7.2 7 .3 7 .3s3.8 0 6.9-.3c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.7.2-3.2v-1.7C22 9.6 21.8 8 21.8 8ZM10 14.7V8.9l5.7 2.9L10 14.7Z" />
+          </svg>
+        </a>
+        <a href="https://www.instagram.com" aria-label="Instagram" target="_blank" rel="noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.5.2.8.4 1.1.7.3.3.5.6.7 1.1.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.5-.4.8-.7 1.1-.3.3-.6.5-1.1.7-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.5-.2-.8-.4-1.1-.7-.3-.3-.5-.6-.7-1.1-.2-.4-.3-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.5.4-.8.7-1.1.3-.3.6-.5 1.1-.7.4-.2 1-.3 2.2-.4 1.3-.1 1.7-.1 4.9-.1Zm0-2.2C8.7 0 8.3 0 7 0 5.7.1 4.9.3 4.2.6c-.8.3-1.4.7-2 1.3C1.6 2.5 1.2 3.1.9 3.9.6 4.6.4 5.4.3 6.7 0 8 0 8.3 0 12c0 3.7 0 4 .3 5.3.1 1.3.3 2.1.6 2.8.3.8.7 1.4 1.3 2 .6.6 1.2 1 2 1.3.7.3 1.5.5 2.8.6C8.3 24 8.7 24 12 24s3.7 0 5-.3c1.3-.1 2.1-.3 2.8-.6.8-.3 1.4-.7 2-1.3.6-.6 1-1.2 1.3-2 .3-.7.5-1.5.6-2.8.3-1.3.3-1.6.3-5.3 0-3.7 0-4-.3-5.3-.1-1.3-.3-2.1-.6-2.8-.3-.8-.7-1.4-1.3-2-.6-.6-1.2-1-2-1.3-.7-.3-1.5-.5-2.8-.6C15.7 0 15.3 0 12 0Z" />
+            <path d="M12 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8Zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4Zm6.4-10.8a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5Z" />
+          </svg>
+        </a>
       </div>
     </div>
-  </section>
-
-  <!-- SIGNUP -->
-  <section id="signup" class="cta" aria-labelledby="signup-title">
-    <div class="container container--narrow mt-150 pt-150">
-      <h2 class="cta-title" id="signup-title">Join the Early Access List</h2>
-      <p class="cta-subtitle mt-25">
-        Be the first to try Antrieb.<br />
-        Register and we’ll notify you when the studio is ready.
-      </p>
-
-      <!-- minimalist validation -->
-      <form class="cta-form mt-95" id="signup-form" action="#" method="post" novalidate>
-        <label>
-          <span>Full Name</span>
-          <input class="control" type="text" name="name" placeholder="Jane Doe" aria-invalid="false" required />
-          <small class="hint" data-for="name"></small>
-        </label>
-
-        <label>
-          <span>Email Address</span>
-          <input class="control" type="email" name="email" placeholder="jane@company.com" aria-invalid="false" required />
-          <small class="hint" data-for="email"></small>
-        </label>
-
-        <label>
-          <span>What excites you about Antrieb.ai? (optional)</span>
-          <textarea class="control" name="note" rows="4" placeholder="Tell us briefly…"></textarea>
-          <small class="hint" data-for="note"></small>
-        </label>
-
-        <button type="submit">Register Interest</button>
-
-        <small id="privacy-note" style="display:block;margin-top:12px;opacity:.85">
-          We’ll only use your email to notify you about early access.
-        </small>
-      </form>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#prints">Request a print</a>
+      <a href="#faq">How it works</a>
+      <a href="mailto:dios.illustrations@gmail.com">dios.illustrations@gmail.com</a>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer" role="contentinfo">
-    <p>© 2025 <a href="#" rel="nofollow">Antrieb.ai</a> All rights reserved.</p>
+    <p>© 2024 Dio's Illustration Studio. All rights reserved.</p>
   </footer>
-
-  <script>
-
-    document.getElementById('scroll-to-signup')?.addEventListener('click', () => {
-      document.getElementById('signup')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-
-    const form = document.getElementById('signup-form');
-
-    const rules = {
-      name: (v) => v.trim().length > 0 || 'Please enter your name',
-      email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Please enter a valid email'
-
-    };
-
-    function setHint(input, msg, ok=false){
-      const hint = input.parentElement.querySelector('.hint[data-for="'+input.name+'"]');
-      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-      if (!hint) return;
-      if (msg){
-        hint.textContent = msg;
-        hint.classList.add('is-error');
-        hint.classList.remove('is-ok');
-      } else {
-        hint.textContent = '';              
-        hint.classList.remove('is-error','is-ok');
-      }
-    }
-
-    function validateField(input){
-      const name = input.name;
-      const val = input.value || '';
-      if (!rules[name]) { setHint(input, ''); return true; }
-      const res = rules[name](val);
-      if (res !== true){ setHint(input, String(res)); return false; }
-      setHint(input, '');
-      return true;
-    }
-
-
-    form.addEventListener('blur', (e)=>{
-      const el = e.target;
-      if (el.classList?.contains('control')) validateField(el);
-    }, true);
-
-
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const inputs = Array.from(form.querySelectorAll('.control'));
-      const ok = inputs.map(validateField).every(Boolean);
-      if (!ok){
-        const first = inputs.find(i => i.getAttribute('aria-invalid') === 'true');
-        first?.focus();
-        return;
-      }
-
-      form.reset();
-      inputs.forEach(i => setHint(i, ''));
-
-
-      const note = document.getElementById('privacy-note');
-      if (note && !note.dataset.ok){
-        const msg = document.createElement('small');
-        msg.textContent = 'Thanks — your request has been recorded.';
-        msg.style.display = 'block';
-        msg.style.marginTop = '10px';
-        msg.style.opacity = '.9';
-        note.insertAdjacentElement('beforebegin', msg);
-        note.dataset.ok = '1';
-        setTimeout(()=>{ msg.remove(); delete note.dataset.ok; }, 3000);
-      }
-    });
-  </script>
 </body>
 </html>
