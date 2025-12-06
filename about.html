@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280">
+    <title>Contact - Dio's Adventurama</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="svg/Purple_logo_T.svg" alt="Dio's Adventurama">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html" data-tab="home">Home</a></li>
+                    <li><a href="#">Get Inspired</a></li>
+                    <li><a href="#">Request a Print</a></li>
+                    <li><a href="#">How it Works</a></li>
+                    <li><a href="about.html" data-tab="about">About</a></li>
+                    <li><a href="contact.html" data-tab="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main data-page="about">
+            <h1 class="page-title">A hub for makers, <br>gamers & dreamers</h1>
+
+            <div class="content-wrapper about-wrapper">
+                <!-- Story & Mission Row -->
+                <div class="story-mission-row">
+                    <!-- Story Block Left -->
+                    <div class="story-block ">
+                        <h2>Story</h2>
+                        <p>Dio's Adventurama began as a small creative project driven by curiosity and imagination.</p>
+                        <p>What started with a single 3D printer and a passion for design quickly grew into a hub for
+                            makers, gamers, and dreamers who wanted to bring their ideas to life.</p>
+                        <p>Today, we turn imagination into tangible art — from detailed miniatures and cosplay pieces to
+                            custom creations made with care and precision.</p>
+                    </div>
+
+                    <!-- Mission Block Right -->
+                    <div class="mission-block">
+                        <h2>Mission</h2>
+                        <p>To make creativity accessible and exciting for everyone.</p>
+                        <p>We believe that everyone has the power to create — and we’re here to provide the tools,
+                            quality, and inspiration to make it happen.</p>
+                    </div>
+                </div>
+
+                <!-- Values Section Full Width -->
+                <div class="values-section">
+                    <h2 class="values-title">Values</h2>
+                    <div class="values-grid">
+                        <div class="value-card quality">
+                            <div class="value-icon"><img src="svg/1.svg" alt="Value icon"></div>
+                            <h3>Quality</h3>
+                        </div>
+                        <div class="value-card creativity">
+                            <div class="value-icon"><img src="svg/1.svg" alt="Value icon"></div>
+                            <h3>Creativity</h3>
+                        </div>
+                        <div class="value-card support">
+                            <div class="value-icon"><img src="svg/1.svg" alt="Value icon"></div>
+                            <h3>Support</h3>
+                        </div>
+                        <div class="value-card playfulness">
+                            <div class="value-icon"><img src="svg/1.svg" alt="Value icon"></div>
+                            <h3>Playfulness</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creative Café Section -->
+            <div class="creative-cafe-section">
+                <h2>Where we’re headed: The Creative Café</h2>
+                <div class="cafe-cta">
+                    <button class="cafe-btn"><span class="btn-label">Join the adventure</span></button>
+                    <a href="#" class="instagram-link">
+                        <img src="svg/inst.svg" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="svg/Purple_logo_T.svg" alt="Dio's Adventurama">
+                <div class="social-icons footer-social-icons">
+                    <div class="footer-social-icon">
+                        <img src="svg/inst.svg" alt="Instagram">
+                    </div>
+                    <div class="footer-social-icon">
+                        <img src="svg/yout.svg" alt="YouTube">
+                    </div>
+                    <div class="footer-social-icon">
+                        <img src="svg/ds.svg" alt="Discord">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-column">
+                    <a href="home.html">Home</a>
+                    <a href="#">Get Inspired</a>
+                    <a href="#">Request a Print</a>
+                </div>
+                <div class="footer-column">
+                    <a href="#">How it Works</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <a href="mailto:dios.adventurama@gmail.com" class="footer-email">dios.adventurama@gmail.com</a>
+                <form class="footer-newsletter">
+                    <input type="text" placeholder="Subscribe to the newsletter">
+                    <button type="submit"><span class="btn-label">→</span></button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let mainEl = document.querySelector('main');
+            const navLinks = document.querySelectorAll('[data-tab]');
+            const navList = document.querySelector('.nav-links');
+            const allNavLinks = navList ? Array.from(navList.querySelectorAll('a')) : [];
+            let underline;
+
+            const ensureUnderline = () => {
+                if (navList && !underline) {
+                    underline = document.createElement('span');
+                    underline.className = 'nav-underline';
+                    navList.appendChild(underline);
+                }
+            };
+
+            const moveUnderline = (link) => {
+                if (!navList || !underline || !link) return;
+                const rect = link.getBoundingClientRect();
+                const parentRect = navList.getBoundingClientRect();
+                underline.style.setProperty('--nav-underline-x', `${rect.left - parentRect.left}px`);
+                underline.style.width = `${rect.width}px`;
+                underline.style.top = `${rect.bottom - parentRect.top + 1}px`;
+                underline.style.bottom = 'auto';
+                underline.style.opacity = '1';
+            };
+
+            const setUnderlineToActive = () => {
+                ensureUnderline();
+                const active = navList?.querySelector('a.active') || allNavLinks[0];
+                if (active) moveUnderline(active);
+            };
+
+            const setActive = (tab) => {
+                navLinks.forEach((link) => {
+                    link.classList.toggle('active', link.dataset.tab === tab);
+                });
+                setUnderlineToActive();
+            };
+
+            if (mainEl && mainEl.dataset.page) {
+                setActive(mainEl.dataset.page);
+            } else {
+                setUnderlineToActive();
+            }
+
+            allNavLinks.forEach((link) => {
+                link.addEventListener('mouseenter', () => {
+                    ensureUnderline();
+                    moveUnderline(link);
+                });
+                link.addEventListener('focus', () => {
+                    ensureUnderline();
+                    moveUnderline(link);
+                });
+            });
+
+            navList?.addEventListener('mouseleave', setUnderlineToActive);
+            window.addEventListener('resize', setUnderlineToActive);
+
+            navLinks.forEach((link) => {
+                link.addEventListener('click', async (event) => {
+                    const targetTab = link.dataset.tab;
+                    if (!targetTab || !mainEl || targetTab === mainEl.dataset.page) return;
+                    event.preventDefault();
+
+                    try {
+                        const response = await fetch(`${targetTab}.html`);
+                        if (!response.ok) throw new Error('Failed to load tab');
+
+                        const html = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newMain = doc.querySelector('main');
+                        if (!newMain) throw new Error('Missing main content');
+
+                        mainEl.replaceWith(newMain);
+                        newMain.dataset.page = targetTab;
+                        mainEl = newMain;
+                        document.title = doc.title || document.title;
+                        setActive(targetTab);
+                    } catch (error) {
+                        window.location.href = link.getAttribute('href');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+
+</html>
