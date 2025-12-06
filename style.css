@@ -53,8 +53,6 @@ body {
     background-color: var(--white);
     color: var(--primary-purple);
     overflow-x: hidden;
-    width: 1280px;
-    margin: 0 auto;
 }
 
 main {
@@ -1106,4 +1104,6 @@ footer {
     margin-top: 200px;
     margin-bottom: 50px;
 }
+
+
 
