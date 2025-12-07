@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1280">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home - Dio's Adventurama</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,8 @@
 </head>
 
 <body>
-
+    <div class="page-scale-outer">
+        <div class="page-scale-inner">
     <div class="container">
         <header>
             <nav class="navbar">
@@ -151,7 +152,7 @@
 
             <div class="footer-links">
                 <div class="footer-column">
-                    <a href="home.html">Home</a>
+                    <a href="index.html">Home</a>
                     <a href="#">Get Inspired</a>
                     <a href="#">Request a Print</a>
                 </div>
@@ -170,15 +171,29 @@
                 </form>
             </div>
         </div>
-    </footer>
+            </footer>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const DESIGN_WIDTH = 1920;
+            const scaleOuter = document.querySelector('.page-scale-outer');
+            const scaleInner = document.querySelector('.page-scale-inner');
             let mainEl = document.querySelector('main');
             const navLinks = document.querySelectorAll('[data-tab]');
             const navList = document.querySelector('.nav-links');
             const allNavLinks = navList ? Array.from(navList.querySelectorAll('a')) : [];
             let underline;
+
+            const applyScale = () => {
+                if (!scaleOuter || !scaleInner) return;
+                const scale = Math.min(1, window.innerWidth / DESIGN_WIDTH);
+                document.documentElement.style.setProperty('--responsive-scale', scale.toFixed(4));
+                scaleInner.style.transform = `translateX(-50%) scale(${scale})`;
+                const scaledHeight = scaleInner.getBoundingClientRect().height;
+                scaleOuter.style.height = `${scaledHeight}px`;
+            };
 
             const ensureUnderline = () => {
                 if (navList && !underline) {
@@ -190,11 +205,12 @@
 
             const moveUnderline = (link) => {
                 if (!navList || !underline || !link) return;
-                const rect = link.getBoundingClientRect();
-                const parentRect = navList.getBoundingClientRect();
-                underline.style.setProperty('--nav-underline-x', `${rect.left - parentRect.left}px`);
-                underline.style.width = `${rect.width}px`;
-                underline.style.top = `${rect.bottom - parentRect.top + 1}px`;
+                const left = link.offsetLeft;
+                const width = link.offsetWidth;
+                const top = link.offsetTop + link.offsetHeight;
+                underline.style.setProperty('--nav-underline-x', `${left}px`);
+                underline.style.width = `${width}px`;
+                underline.style.top = `${top + 1}px`;
                 underline.style.bottom = 'auto';
                 underline.style.opacity = '1';
             };
@@ -203,6 +219,11 @@
                 ensureUnderline();
                 const active = navList?.querySelector('a.active') || allNavLinks[0];
                 if (active) moveUnderline(active);
+            };
+
+            const updateScaleAndUnderline = () => {
+                applyScale();
+                setUnderlineToActive();
             };
 
             const setActive = (tab) => {
@@ -244,6 +265,8 @@
 
             // Init Carousel on load
             initCarousel();
+            updateScaleAndUnderline();
+            window.addEventListener('load', updateScaleAndUnderline);
 
             allNavLinks.forEach((link) => {
                 link.addEventListener('mouseenter', () => {
@@ -257,7 +280,10 @@
             });
 
             navList?.addEventListener('mouseleave', setUnderlineToActive);
-            window.addEventListener('resize', setUnderlineToActive);
+            const handleResize = () => {
+                updateScaleAndUnderline();
+            };
+            window.addEventListener('resize', handleResize);
 
             navLinks.forEach((link) => {
                 link.addEventListener('click', async (event) => {
@@ -280,6 +306,7 @@
                         mainEl = newMain;
                         document.title = doc.title || document.title;
                         setActive(targetTab);
+                        updateScaleAndUnderline();
 
                         // Re-init carousel if we are on home
                         if (targetTab === 'home') {
@@ -297,8 +324,6 @@
 
 
 </html>
-
-
 
 
 
