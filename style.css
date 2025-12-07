@@ -32,7 +32,10 @@
 /* === Base variables & typography === */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
 :root {
-    
+    --design-width: 1920;
+    --design-width-px: calc(var(--design-width) * 1px);
+    --responsive-scale: 1;
+    --responsive-viewport: var(--design-width-px);
     --white: #ffffff;
     --yellow: #fffcd9;
     --primary-purple: #a592e8;
@@ -53,6 +56,24 @@ body {
     background-color: var(--white);
     color: var(--primary-purple);
     overflow-x: hidden;
+}
+
+.page-scale-outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.page-scale-inner {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: var(--responsive-viewport);
+    transform: translateX(-50%) scale(var(--responsive-scale));
+    transform-origin: top center;
 }
 
 main {
@@ -589,24 +610,6 @@ footer {
     margin-top: 0 !important;
 }
 
-@media (max-width: 900px) {
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-    .footer-links {
-        display: flex;
-        gap: 30px;
-    }
-    .footer-right {
-        text-align: center;
-    }
-    .footer-logo>img {
-        height: 40px;
-        
-    }
-}
 .footer-links {
     display: flex;
     gap: 100px;
@@ -893,10 +896,10 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: clamp(50px, 6vw, 80px);
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding: 0 0 0 clamp(40px, 22vw, 360px);
+    gap: clamp(50px, calc(var(--responsive-viewport) * 0.06), 80px);
+    width: var(--responsive-viewport);
+    margin-left: calc(50% - (var(--responsive-viewport) / 2));
+    padding: 0 0 0 clamp(40px, calc(var(--responsive-viewport) * 0.22), 360px);
     align-self: flex-start;
 }
 
@@ -945,7 +948,7 @@ footer {
 
 .featured-right {
     flex: 0 1 auto;
-    width: clamp(820px, 65vw, 900px);
+    width: clamp(820px, calc(var(--responsive-viewport) * 0.65), 900px);
     overflow: hidden;
     min-width: 0;
     margin-left: auto;
@@ -1019,8 +1022,8 @@ footer {
 }
 
 .how-it-works-section {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
+    width: var(--responsive-viewport);
+    margin-left: calc(50% - (var(--responsive-viewport) / 2));
     background: var(--primary-purple);
     color: var(--white);
     padding: 140px 60px 160px;
