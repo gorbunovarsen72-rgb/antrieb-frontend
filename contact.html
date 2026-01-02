@@ -7,125 +7,133 @@
     <title>Contact - Dio's Adventurama</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="page-scale-outer">
         <div class="page-scale-inner">
-    <div class="container">
-        <header>
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="svg/Purple_logo_T.svg" alt="Dio's Adventurama">
+            <header>
+                <div class="container">
+                    <nav class="navbar">
+                        <div class="logo">
+                            <img src="svg/Primary_logo_T.svg" alt="Dio's Adventurama">
+                        </div>
+                        <ul class="nav-links">
+                            <li><a href="index.html" data-tab="home">Home</a></li>
+                            <li><a href="#">Get Inspired</a></li>
+                            <li><a href="#">Request a Print</a></li>
+                            <li><a href="#">How it Works</a></li>
+                            <li><a href="about.html" data-tab="about">About</a></li>
+                            <li><a href="contact.html" data-tab="contact">Contact</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="index.html" data-tab="home">Home</a></li>
-                    <li><a href="#">Get Inspired</a></li>
-                    <li><a href="#">Request a Print</a></li>
-                    <li><a href="#">How it Works</a></li>
-                    <li><a href="about.html" data-tab="about">About</a></li>
-                    <li><a href="contact.html" data-tab="contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
+            </header>
 
-        <main data-page="contact">
-            <h1 class="page-title">Let's connect</h1>
+            <div class="container">
+                <main data-page="contact">
+                    <h1 class="page-title">Let's connect</h1>
 
-            <div class="content-wrapper contact-layout">
-                <!-- Left Column -->
-                <div class="left-column">
-                    <!-- Contact Form -->
-                    <div class="contact-form-card">
-                        <h1>Contact Form</h1>
-                        <form action="#">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" placeholder="Daniel">
+                    <div class="content-wrapper contact-layout">
+                        <!-- Left Column -->
+                        <div class="left-column">
+                            <!-- Contact Form -->
+                            <div class="contact-form-card">
+                                <h1>Contact Form</h1>
+                                <form action="#">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" id="name" placeholder="Daniel">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" placeholder="your@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message"
+                                            placeholder="Hello! I'm looking to create a few custom organizers for my gaming setup — mostly for dice, tokens, and cards."></textarea>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" placeholder="your@email.com">
+                            <button class="send-btn"><span class="btn-label">Send Message</span></button>
+                        </div>
+
+                        <!-- Contact Info -->
+                        <div class="contact-info">
+                            <h2>Join the adventure<br>online</h2>
+                            <div class="social-icons contact-social-icons">
+                                <a href="https://www.instagram.com/dios_adventurama/" target="_blank"
+                                    class="contact-social-icon">
+                                    <img src="svg/inst.svg" alt="Instagram">
+                                </a>
+                                <div class="contact-social-icon">
+                                    <img src="svg/yout.svg" alt="YouTube">
+                                </div>
+                                <a href="https://discord.gg/tHkBt7wa" target="_blank" class="contact-social-icon">
+                                    <img src="svg/ds.svg" alt="Discord">
+                                </a>
                             </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message"
-                                    placeholder="Hello! I'm looking to create a few custom organizers for my gaming setup — mostly for dice, tokens, and cards."></textarea>
+
+                            <div class="newsletter-section">
+                                <h2>Subscribe to our<br>newsletter</h2>
+                                <form class="newsletter-form">
+                                    <input type="email" placeholder="your@email.com">
+                                    <button type="submit" class="newsletter-btn"><span
+                                            class="btn-label">Subscribe</span></button>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+
+            <footer>
+                <div class="container footer-content">
+                    <div class="footer-logo">
+                        <img src="svg/Purple_logo_T.svg" alt="Dio's Adventurama">
+                        <div class="social-icons footer-social-icons">
+                            <a href="https://www.instagram.com/dios_adventurama/" target="_blank"
+                                class="footer-social-icon">
+                                <img src="svg/inst.svg" alt="Instagram">
+                            </a>
+                            <div class="footer-social-icon">
+                                <img src="svg/yout.svg" alt="YouTube">
+                            </div>
+                            <a href="https://discord.gg/tHkBt7wa" target="_blank" class="footer-social-icon">
+                                <img src="svg/ds.svg" alt="Discord">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <a href="index.html">Home</a>
+                            <a href="#">Get Inspired</a>
+                            <a href="#">Schedule a session</a>
+                            <a href="#">Request a Print</a>
+                        </div>
+                        <div class="footer-column">
+                            <a href="#">How it Works</a>
+                            <a href="about.html">About</a>
+                            <a href="contact.html">Contact</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-right">
+                        <a href="mailto:dios@diosadventurama.com" class="footer-email">dios@diosadventurama.com</a>
+                        <form class="footer-newsletter">
+                            <input type="text" placeholder="Subscribe to the newsletter">
+                            <button type="submit"><span class="btn-label">→</span></button>
                         </form>
                     </div>
-                    <button class="send-btn"><span class="btn-label">Send Message</span></button>
                 </div>
-
-                <!-- Contact Info -->
-                <div class="contact-info">
-                    <h2>Join the adventure<br>online</h2>
-                    <div class="social-icons contact-social-icons">
-                        <div class="contact-social-icon">
-                            <img src="svg/inst.svg" alt="Instagram">
-                        </div>
-                        <div class="contact-social-icon">
-                            <img src="svg/yout.svg" alt="YouTube">
-                        </div>
-                        <div class="contact-social-icon">
-                            <img src="svg/ds.svg" alt="Discord">
-                        </div>
-                    </div>
-
-                    <div class="newsletter-section">
-                        <h2>Subscribe to our<br>newsletter</h2>
-                        <form class="newsletter-form">
-                            <input type="email" placeholder="your@email.com">
-                            <button type="submit" class="newsletter-btn"><span class="btn-label">Subscribe</span></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <footer>
-        <div class="container footer-content">
-                <div class="footer-logo">
-                <img src="svg/Purple_logo_T.svg" alt="Dio's Adventurama">
-                <div class="social-icons footer-social-icons">
-                    <div class="footer-social-icon">
-                        <img src="svg/inst.svg" alt="Instagram">
-                    </div>
-                    <div class="footer-social-icon">
-                        <img src="svg/yout.svg" alt="YouTube">
-                    </div>
-                    <div class="footer-social-icon">
-                        <img src="svg/ds.svg" alt="Discord">
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-links">
-                <div class="footer-column">
-                    <a href="index.html">Home</a>
-                    <a href="#">Get Inspired</a>
-                    <a href="#">Request a Print</a>
-                </div>
-                <div class="footer-column">
-                    <a href="#">How it Works</a>
-                    <a href="about.html">About</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-
-            <div class="footer-right">
-                <a href="mailto:dios.adventurama@gmail.com" class="footer-email">dios.adventurama@gmail.com</a>
-                <form class="footer-newsletter">
-                    <input type="text" placeholder="Subscribe to the newsletter">
-                    <button type="submit"><span class="btn-label">→</span></button>
-                </form>
-            </div>
-        </div>
-    </footer>
+            </footer>
 
         </div>
     </div>
