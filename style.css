@@ -129,6 +129,8 @@ header {
     padding: 25px 0;
     background-color: var(--primary-purple);
     color: var(--white);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
 }
 
 .navbar {
