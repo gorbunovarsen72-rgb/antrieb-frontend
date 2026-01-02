@@ -685,14 +685,14 @@ footer {
 .footer-links {
     display: flex;
     gap: 100px;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .footer-column a {
